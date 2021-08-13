@@ -12,6 +12,7 @@ app.use(morgan("common"))
 app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/public/index.html')
 })
+
 const post = require('./router/post')
 const check = require('./router/check')
 const auth = require('./router/auth')
