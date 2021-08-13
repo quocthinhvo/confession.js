@@ -5,6 +5,7 @@ const express = require('express')
 const Post = require('../model/post')
 const knn = require('../lib/knn/main')
 const knn2 = require('../lib/knn2/main')
+const token = require('../middleware/token')
 
 const router = express.Router()
 
@@ -41,7 +42,7 @@ router.post('/new', (req, res)=> {
 router.get('/info/:idpost', (req, res)=>{
     Post.findById(req.params.idpost)
     .then ((data)=>{
-        data.ip = ""
+        data.ip = undefined
         res.status(200).send(data)
     })
     .catch ((err)=> {
@@ -59,5 +60,33 @@ router.delete('/delete/:idpost', (req, res)=> {
         res.status(500).send({message: "Error when delete", err})
     })
 })
+
+router.get('/all/:page', (req, res)=>{
+    const dataLimit = parseInt(process.env.DATA_LIMIT) || 10
+    let page = req.params.page >=1 ? req.params.page : 1
+    page = page - 1
+    let output = []
+    Post.find({approved: false})
+        .limit(dataLimit)
+        .skip(page * dataLimit)
+        .sort({time: -1})
+        .then ((data)=>{
+            for (i of data){
+                i._id = null
+                i.approved = undefined
+                i.label = undefined
+                i.accuracy = undefined
+                i.ip = undefined
+                i.approved_time = undefined
+                i.approved_admin = undefined
+                output.push(i)
+            }
+            res.status(200).send(output)
+        })
+        .catch((err)=>{
+            res.status(500).send(err)
+        })
+})
+
 
 module.exports = router

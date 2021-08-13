@@ -16,9 +16,11 @@ app.get('/', (req, res)=>{
 const post = require('./router/post')
 const check = require('./router/check')
 const auth = require('./router/auth')
+const admin = require('./router/admin')
 app.use('/api/post', post)
 app.use('/api/check', check)
 app.use('/api/auth', auth)
+app.use('/api/admin', admin)
 
 app.listen(port, ()=> {
     console.log(`Server running on ${port}`)
