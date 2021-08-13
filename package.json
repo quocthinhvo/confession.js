@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/quocthinhvo/confessions/issues"
   },
-  "homepage": "https://github.com/quocthinhvo/confessions#readme"
+  "homepage": "https://github.com/quocthinhvo/confessions#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7"
+  }
 }
