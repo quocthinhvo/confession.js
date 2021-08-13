@@ -7,6 +7,9 @@ const postSchema = mongoose.Schema({
     },
     time: String,
     time_format: String,
+    approved: Boolean,
+    label: String,
+    accuracy: Number,
     ip: String,
     host: String
 })
