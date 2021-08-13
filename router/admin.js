@@ -31,4 +31,18 @@ router.put('/approve/:idpost', (req, res)=> {
         })
     })
 })
+
+router.delete('/delete/:idpost', (req, res)=> {
+    token.getUsernameFromHeader(req, res, (usernameInput)=>{
+        Post.deleteOne({_id:req.params.idpost, approved: false})
+        .then((dataDeleted)=>{
+            if (dataDeleted.deletedCount > 0) return res.status(200).send({message: "Post deleted"})
+            res.status(404).send({message: "Post not found or approved"})
+        })
+        .catch((err)=>{
+            res.status(500).send({message: "Error when delete", err})
+        })
+    })
+})
+
 module.exports = router

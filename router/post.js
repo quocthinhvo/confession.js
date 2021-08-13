@@ -88,5 +88,34 @@ router.get('/all/:page', (req, res)=>{
         })
 })
 
+router.get('/search/:page', (req, res)=>{
+    const dataLimit = parseInt(process.env.DATA_LIMIT) || 10
+    let page = req.params.page >=1 ? req.params.page : 1
+    page = page - 1 
+    let output = []
+    Post.find({text: {
+        "$regex": req.query.query,
+        "$options": "i"
+    }})
+    .limit(dataLimit)
+    .skip(page * dataLimit)
+    .then ((data)=>{
+        for (i of data){
+            i._id = null
+            i.approved = undefined
+            i.label = undefined
+            i.accuracy = undefined
+            i.ip = undefined
+            i.approved_time = undefined
+            i.approved_admin = undefined
+            output.push(i)
+        }
+        res.status(200).send(output)
+    })
+    .catch((err)=>{
+        res.status(500).send({message: "err", err})
+    })
+
+})
 
 module.exports = router
