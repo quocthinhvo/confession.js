@@ -22,7 +22,7 @@ router.post('/new', (req, res)=> {
     })
     post.save((err, data)=> {
         if (err) throw res.status(500).send({message: "Error", err})
-        res.status(200).send({message: "OK"})
+        res.status(200).send({message: "OK", id: data._id})
     })
 })
 
