@@ -13,7 +13,7 @@ function checkWord(string){
 }
 
 router.get('/', (req, res)=> {
-    res.status(405).send({message: "Only POST"})
+    res.status(200).send({message: "API to interact with post"})
 })
 
 router.post('/new', (req, res)=> {
@@ -28,7 +28,9 @@ router.post('/new', (req, res)=> {
         label: checkResult[1],
         accuracy: checkResult[2],
         ip: req.ip,
-        host: req.hostname
+        host: req.hostname,
+        approved_time: "", 
+        approved_admin: ""
     })
     post.save((err, data)=> {
         if (err) throw res.status(500).send({message: "Error", err})
@@ -39,10 +41,22 @@ router.post('/new', (req, res)=> {
 router.get('/info/:idpost', (req, res)=>{
     Post.findById(req.params.idpost)
     .then ((data)=>{
+        data.ip = ""
         res.status(200).send(data)
     })
     .catch ((err)=> {
         res.status(404).send({message: "Post not found"})
+    })
+})
+
+router.delete('/delete/:idpost', (req, res)=> {
+    Post.deleteOne({_id: req.params.idpost, approved: false})
+    .then((dataDeleted)=>{
+        if (dataDeleted.deletedCount > 0) {res.status(200).send({message: "Deleted post"})}
+        else res.status(405).send({message: "Delete failed because the post was approved by the administrator."})
+    })
+    .catch((err)=> {
+        res.status(500).send({message: "Error when delete", err})
     })
 })
 

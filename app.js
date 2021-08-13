@@ -14,6 +14,7 @@ const check = require('./router/check')
 app.use('/api/post', post)
 app.use('/api/check', check)
 
+
 app.listen(port, ()=> {
     console.log(`Server running on ${port}`)
 })

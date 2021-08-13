@@ -11,7 +11,9 @@ const postSchema = mongoose.Schema({
     label: String,
     accuracy: Number,
     ip: String,
-    host: String
+    host: String,
+    approved_time: String, 
+    approved_admin: String
 })
 
 const postModel = mongoose.model('post', postSchema)
