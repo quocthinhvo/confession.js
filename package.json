@@ -1,0 +1,21 @@
+{
+  "name": "confessions",
+  "version": "1.0.0",
+  "description": "Confessions by QuocThinhVo",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node app.js",
+    "run": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quocthinhvo/confessions.git"
+  },
+  "author": "Vo Quoc Thinh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quocthinhvo/confessions/issues"
+  },
+  "homepage": "https://github.com/quocthinhvo/confessions#readme"
+}
