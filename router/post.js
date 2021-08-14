@@ -67,7 +67,7 @@ router.get('/all/:page', (req, res)=>{
     let page = req.params.page >=1 ? req.params.page : 1
     page = page - 1
     let output = []
-    Post.find({approved: false})
+    Post.find({approved: true})
         .limit(dataLimit)
         .skip(page * dataLimit)
         .sort({time: -1})
