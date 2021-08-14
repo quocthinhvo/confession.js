@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search)
 
-document.getElementById('code').innerHTML =  params.get('code')
+document.getElementById('code').innerText =  params.get('code')
 
 function info() {
     window.location.href = `/info?code=${params.get('code')}`

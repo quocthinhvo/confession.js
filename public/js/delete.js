@@ -14,11 +14,11 @@ function del(){
         return res.json()
     })
     .then((data)=>{
-        returnText.innerHTML = data.message
-        returnText.className += ' text-info'
+        returnText.innerText = data.message
+        returnText.className += ' text-dark'
     })
     .catch((error)=>{
-        returnText.innerHTML = 'Some error when delete'
+        returnText.innerText = 'Unknow error when delete'
         returnText.className += ' text-danger'
     })
 }

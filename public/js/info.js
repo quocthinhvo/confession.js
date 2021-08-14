@@ -6,26 +6,26 @@ document.getElementById('error').style.display = 'none'
 
 function renderPost(post) {
     document.getElementById('ok').style.display = 'block'
-    document.getElementById('text').innerHTML = post.text
-    document.getElementById('time_format').innerHTML += post.time_format
+    document.getElementById('text').innerText = post.text
+    document.getElementById('time_format').innerText += post.time_format
     if (post.approved) {
-        document.getElementById('approved').innerHTML += '<i class="fa fa-check" style="color:green;"></i>'
+        document.getElementById('approved').innerText += '<i class="fa fa-check" style="color:green;"></i>'
     }
     else {
-        document.getElementById('approved').innerHTML += '<i class="fa fa-lock" style="color:red;"></i>'
+        document.getElementById('approved').innerText += '<i class="fa fa-lock" style="color:red;"></i>'
     }
     if (post.label == "Câu bình thường"){
-        document.getElementById('label').innerHTML += '<i class="fa fa-check" style="color:green;"></i>'
+        document.getElementById('label').innerText += '<i class="fa fa-check" style="color:green;"></i>'
     } else {
-        document.getElementById('label').innerHTML += '<i class="fa fa-exclamation" style="color:red;"></i>'
+        document.getElementById('label').innerText += '<i class="fa fa-exclamation" style="color:red;"></i>'
     }
-    document.getElementById('label').innerHTML += ' ' + post.accuracy  + '%'
+    document.getElementById('label').innerText += ' ' + post.accuracy  + '%'
     
 }
 
 function renderError(error){
     document.getElementById('error').style.display = 'block'
-    document.getElementById('error_value').innerHTML = error.message
+    document.getElementById('error_value').innerText = error.message
 }
 fetch(`api/post/info/${code}`, {
     method: 'GET',
