@@ -3,8 +3,10 @@ const code = params.get('code')
 
 document.getElementById('ok').style.display = 'none'
 document.getElementById('error').style.display = 'none'
+document.getElementById('search').style.display  = 'none'
 
 function renderPost(post) {
+    document.getElementById('search').style.display  = 'none'
     document.getElementById('ok').style.display = 'block'
     document.getElementById('text').innerText = post.text
     document.getElementById('time_format').innerHTML += post.time_format
@@ -26,19 +28,30 @@ function renderPost(post) {
 function renderError(error){
     document.getElementById('error').style.display = 'block'
     document.getElementById('error_value').innerText = error.message
-}
-fetch(`api/post/info/${code}`, {
-    method: 'GET',
-    headers: { 'Content-Type' : 'application/json'}
-})
-.then((res)=>{
-    return res.json()
-})
-.then((data)=>{
-    if (data._id) 
-    renderPost(data)
-    else renderError(data)
-})
-.catch((error)=>{
+    document.getElementById('search').style.display  = 'none'
 
-})
+}
+
+function search(queryInput){
+    fetch(`api/post/info/${queryInput}`, {
+        method: 'GET',
+        headers: { 'Content-Type' : 'application/json'}
+    })
+    .then((res)=>{
+        return res.json()
+    })
+    .then((data)=>{
+        if (data._id) 
+        renderPost(data)
+        else renderError(data)
+    })
+    .catch((error)=>{
+    
+    })
+}
+
+if (!code) {
+    document.getElementById('search').style.display = 'block'
+} else {
+    search(code)
+}

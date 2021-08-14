@@ -24,7 +24,23 @@
       <div class="row align-items-stretch justify-content-center no-gutters">
         <div class="col-md-7">
           <div class="form h-100 contact-wrap p-5">
-            <div id="ok">
+            <div id="search" style="display:none">
+              <h2 class="text-center text-success">INFO POST</h2>
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <label for="postid" class="col-form-label">Post ID</label>
+                  <input type="text" class="form-control" id="postid" placeholder="">
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-5 form-group text-center">
+                  <button class="btn btn-block btn-info rounded-0 py-2 px-4" onClick="search(document.getElementById('postid').value)" >SEARCH</button>
+                  <span class="submitting"></span>
+                </div>
+              </div>
+            </div>
+            
+            <div id="ok" style="display:none">
                 <h2 class="text-center text-success">INFO POST</h2>
                 <p id="time_format"><strong style="color: black">Submit at: </strong></p>
                 <p id="approved"><strong style="color: black">Approved: </strong></p>
@@ -32,7 +48,7 @@
                 <strong style="color: black">Message content: </strong>
                 <p id="text"></p>
             </div>
-            <div id="error">
+            <div id="error" style="display:none">
                 <h2 class="text-center text-danger">ERROR</h2>
                 <p class="text-center" id="error_value"></p>
             </div>
