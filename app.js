@@ -13,6 +13,17 @@ app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/public/index.html')
 })
 
+app.get('/complete', (req, res)=>{
+    res.sendFile(__dirname + '/public/complete.html')
+})
+
+app.get('/info', (req, res)=>{
+    res.sendFile(__dirname + '/public/info.html')
+})
+
+app.get('/delete', (req, res)=> {
+    res.sendFile(__dirname + '/public/delete.html')
+})
 const post = require('./router/post')
 const check = require('./router/check')
 const auth = require('./router/auth')

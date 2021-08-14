@@ -43,6 +43,7 @@ router.get('/info/:idpost', (req, res)=>{
     Post.findById(req.params.idpost)
     .then ((data)=>{
         data.ip = undefined
+        data.approved_admin = undefined
         res.status(200).send(data)
     })
     .catch ((err)=> {
@@ -54,10 +55,10 @@ router.delete('/delete/:idpost', (req, res)=> {
     Post.deleteOne({_id: req.params.idpost, approved: false})
     .then((dataDeleted)=>{
         if (dataDeleted.deletedCount > 0) {res.status(200).send({message: "Deleted post"})}
-        else res.status(405).send({message: "Delete failed because the post was approved by the administrator."})
+        else res.status(405).send({message: "Delete failed because post not found or approved by the administrator."})
     })
     .catch((err)=> {
-        res.status(500).send({message: "Error when delete", err})
+        res.status(500).send({message: "Some error when delete. Maybe your ID is not correct", err})
     })
 })
 
